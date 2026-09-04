@@ -1,0 +1,14 @@
+.DS_Store
+.playwright-cli/
+output/
+.idea/
+.vscode/
+*.iml
+target/
+node_modules/
+frontend/dist/
+frontend/node_modules/
+coverage/
+.env
+.env.*
+!.env.example

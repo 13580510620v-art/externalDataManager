@@ -1,0 +1,15 @@
+package com.edm.security;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Set;
+
+@Schema(description = "已认证用户")
+public record LoginUser(
+        @Schema(description = "用户 ID") Long id,
+        @Schema(description = "用户名") String username,
+        @Schema(description = "姓名") String fullName,
+        @Schema(description = "是否启用") boolean enabled,
+        @Schema(description = "权限编码集合") Set<String> permissions
+) {
+}

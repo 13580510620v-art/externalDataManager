@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: external-data-manager
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/external_data_manager?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${MYSQL_USERNAME:edm}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: true
+    global-config:
+      db-config:
+        table-underline: true
+
+springdoc:
+  api-docs:
+    enabled: ${EDM_SWAGGER_ENABLED:false}
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: ${EDM_SWAGGER_ENABLED:false}
+    path: /swagger-ui.html
+    with-credentials: true
+    csrf:
+      enabled: true
+
+edm:
+  auth:
+    token-ttl: ${EDM_AUTH_TOKEN_TTL:8h}
+  cors:
+    allowed-origins: ${EDM_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
+  cookie:
+    same-site: ${EDM_COOKIE_SAMESITE:LAX}
+    secure: ${EDM_COOKIE_SECURE:false}
+  saml:
+    enabled: ${EDM_SAML_ENABLED:false}
+    idp-metadata-url: ${EDM_SAML_IDP_METADATA_URL:}
+    entity-id: ${EDM_SAML_ENTITY_ID:}
+    base-url: ${EDM_SAML_BASE_URL:}
+    success-url: ${EDM_SAML_SUCCESS_URL:http://localhost:5173/dashboard}
+    failure-url: ${EDM_SAML_FAILURE_URL:http://localhost:5173/login?samlError=1}
+  admin:
+    username: ${EDM_ADMIN_USERNAME:}
+    password: ${EDM_ADMIN_PASSWORD:}
